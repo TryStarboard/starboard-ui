@@ -1,0 +1,14 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  // font-family: 'Noto Sans', sans-serif;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}

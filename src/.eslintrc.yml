@@ -1,0 +1,12 @@
+parserOptions:
+  sourceType: module
+
+env:
+  browser: true
+  node: false
+
+rules:
+  no-dirname: 2
+  no-restricted-syntax:
+    - 2
+    - WithStatement
