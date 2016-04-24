@@ -1,5 +1,5 @@
 import {merge, path}     from 'ramda';
-import {UPDATE_PROGRESS} from '../../shared/action-types';
+import {UPDATE_PROGRESS} from '../../../shared/action-types';
 import {
   CHNAGE_ADD_TAG_INPUT,
   ADD_TAG_INVALID_INPUT,

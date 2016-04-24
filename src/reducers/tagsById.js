@@ -1,5 +1,5 @@
 import {indexBy, prop, assoc, omit} from 'ramda';
-import {UPDATE_TAGS} from '../../shared/action-types';
+import {UPDATE_TAGS} from '../../../shared/action-types';
 import {ADD_TAG, DELETE_TAG, GET_ALL_TAGS} from '../actions/creators';
 
 export default function (state = {}, {type, payload}) {

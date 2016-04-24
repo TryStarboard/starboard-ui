@@ -4,11 +4,9 @@
 
 const join = require('path').join;
 const webpack = require('webpack');
-const config = require('config');
+const conf = require('./conf');
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
-
-const conf = {
+const config = {
   entry: './src/index.js',
 
   output: {
@@ -28,8 +26,8 @@ const conf = {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel?presets[]=es2015&presets[]=react'
+        exclude: /node_modules|shared/,
+        loader: 'babel?presets[]=es2015&presets[]=react',
       },
       {
         test: /\.(jpg|png)$/,
@@ -45,14 +43,14 @@ const conf = {
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-      'MIXPANEL_TOKEN': JSON.stringify(config.get('mixpanel.token')),
+      'process.env.NODE_ENV': JSON.stringify(conf.get('env')),
+      'MIXPANEL_TOKEN': JSON.stringify(conf.get('mixpanel.token')),
     })
   ]
 };
 
-if (NODE_ENV === 'production') {
-  conf.plugins.push(
+if (conf.get('env') === 'production') {
+  config.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         pure_getters: true,
@@ -65,4 +63,4 @@ if (NODE_ENV === 'production') {
   );
 }
 
-module.exports = conf;
+module.exports = config;
