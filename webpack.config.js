@@ -4,14 +4,15 @@
 
 const join = require('path').join;
 const webpack = require('webpack');
+const AssetsPlugin = require('assets-webpack-plugin');
 const conf = require('./conf');
 
 const config = {
   entry: './src/index.js',
 
   output: {
-    filename: 'bundle.js',
     path: join(__dirname, 'public'),
+    filename: '[name]-bundle-[hash].js',
   },
 
   devtool: 'source-map',
@@ -61,6 +62,8 @@ if (conf.get('env') === 'production') {
       }
     })
   );
+
+  config.plugins.push(new AssetsPlugin());
 }
 
 module.exports = config;
