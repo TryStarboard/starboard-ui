@@ -48,7 +48,8 @@ const config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(conf.get('env')),
       'MIXPANEL_TOKEN': JSON.stringify(conf.get('mixpanel.token')),
-    })
+    }),
+    new AssetsPlugin(),
   ]
 };
 
@@ -64,8 +65,6 @@ if (conf.get('env') === 'production') {
       }
     })
   );
-
-  config.plugins.push(new AssetsPlugin());
 }
 
 module.exports = config;
