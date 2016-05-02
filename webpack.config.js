@@ -12,7 +12,9 @@ const config = {
 
   output: {
     path: join(__dirname, 'public'),
-    filename: '[name]-bundle-[hash].js',
+    filename: conf.get('env') === 'production' ?
+      '[name]-bundle-[hash].js' :
+      'bundle.js',
   },
 
   devtool: 'source-map',

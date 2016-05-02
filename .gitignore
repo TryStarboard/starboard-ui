@@ -11,3 +11,4 @@ local*
 /typings/browser*
 /.idea
 .tmp
+webpack-assets.json
