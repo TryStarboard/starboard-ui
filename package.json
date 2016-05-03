@@ -68,6 +68,8 @@
     "watch:build:css": "npm run build:css -- -w",
     "watch:build": "npm run watch:build:js & npm run watch:build:css",
     "start": "http-server ./public -p 10010",
+    "preversion": "npm run check && npm run build",
+    "postversion": "git push && git push --tags",
     "deploy": "env $(cat local/env-prod) npm run build && node scripts/deploy.js"
   }
 }
