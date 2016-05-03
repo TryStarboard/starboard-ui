@@ -6,6 +6,7 @@ const Promise = require('bluebird');
 const glob = Promise.promisify(require('glob'));
 const co = require('co');
 const R = require('ramda');
+const mime = require('mime');
 const gcloud = require('gcloud')({
   projectId: 'starboard-1277',
   keyFilename: join(__dirname, '../local/starboard-ui-deploy.json'),
@@ -40,5 +41,9 @@ co(function *() {
 
 function upload(file) {
   console.log(`Uploading ${file}`);
-  return bucket.uploadAsync(file, mergeDest({desination: basename(file)}));
+  const opts = mergeDest({
+    desination: basename(file),
+  });
+  opts.metadata['contentType'] = mime.lookup(file);
+  return bucket.uploadAsync(file, opts);
 }
