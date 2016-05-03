@@ -1,6 +1,6 @@
 import axios from 'axios';
 import mixpanel from '../mixpanel';
-import {SYNC_REPOS, LOGOUT, DELETE_ACCOUNT} from '../../../shared/action-types';
+import {SYNC_REPOS, LOGOUT, DELETE_ACCOUNT} from '../../shared/action-types';
 
 export function createSyncRepos(socket, store) {
   return function syncRepos() {

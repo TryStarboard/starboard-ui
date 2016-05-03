@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import {UPDATE_SOME_REPOS, REMOVE_REPOS, UPDATE_TAGS, UPDATE_PROGRESS} from '../../shared/action-types';
+import {UPDATE_SOME_REPOS, REMOVE_REPOS, UPDATE_TAGS, UPDATE_PROGRESS} from '../shared/action-types';
 import {updateSomeRepos, removeRepos, updateTags, updateProgress} from './actions-server';
 
 const socket = io();

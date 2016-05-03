@@ -1,6 +1,6 @@
 import {indexBy, prop, append, reject, equals, merge, pipe, contains, __, map} from 'ramda';
 import u from 'updeep';
-import {UPDATE_SOME_REPOS, REMOVE_REPOS} from '../../../shared/action-types';
+import {UPDATE_SOME_REPOS, REMOVE_REPOS} from '../../shared/action-types';
 import {
   APPLY_TAG_TO_REPO,
   DELETE_TAG,
