@@ -63,7 +63,7 @@
     "check": "npm run lint && npm test",
     "build:js": "webpack",
     "build:css": "node-sass --output-style expanded -o public src/style/index.scss",
-    "build": "npm run clean && npm run build:js && npm run build:css",
+    "build": "npm run clean && npm run build:js -- --bail && npm run build:css",
     "watch:build:js": "npm run build:js -- -w",
     "watch:build:css": "npm run build:css -- -w",
     "watch:build": "npm run watch:build:js & npm run watch:build:css",
