@@ -56,7 +56,7 @@
     "webpack": "1.12.14"
   },
   "scripts": {
-    "clean": "rm -rf public",
+    "clean": "rm -rf webpack-assets.json public",
     "lint": "eslint --rulesdir src *.js",
     "watch:lint": "npm run lint -s & onchange 'src/**/*.js' '*.js' -v -- npm run lint -s",
     "test": "",
