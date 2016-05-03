@@ -70,6 +70,6 @@
     "start": "http-server ./public -p 10010",
     "preversion": "npm run check && npm run build",
     "postversion": "git push && git push --tags",
-    "deploy": "env $(cat local/env-prod) npm run build && node scripts/deploy.js"
+    "deploy": "node scripts/deploy.js"
   }
 }
