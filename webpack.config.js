@@ -8,13 +8,18 @@ const AssetsPlugin = require('assets-webpack-plugin');
 const conf = require('./conf');
 
 const config = {
-  entry: './src/index.js',
+  entry: {
+    app: './src/index.js'
+  },
 
   output: {
     path: join(__dirname, 'public'),
-    filename: conf.get('env') === 'production' ?
-      '[name]-bundle-[hash].js' :
-      'bundle.js',
+    publicPath: conf.get('env') !== 'production' ?
+      'http://localhost:10010/' :
+      'http://static.getstarboard.xyz/',
+    filename: conf.get('env') !== 'production' ?
+      'bundle.js' :
+      '[name]-[hash].js',
   },
 
   devtool: 'source-map',
@@ -49,7 +54,9 @@ const config = {
       'process.env.NODE_ENV': JSON.stringify(conf.get('env')),
       'MIXPANEL_TOKEN': JSON.stringify(conf.get('mixpanel.token')),
     }),
-    new AssetsPlugin(),
+    new AssetsPlugin({
+      prettyPrint: true,
+    }),
   ]
 };
 
