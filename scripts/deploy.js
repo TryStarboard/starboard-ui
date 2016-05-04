@@ -18,15 +18,11 @@ const bucket = gcs.bucket('static.getstarboard.xyz');
 Promise.promisifyAll(Object.getPrototypeOf(bucket));
 
 const DEFAULT = {
+  gzip: true,
   metadata: {
-    acl: [
-      {
-        entity: 'allUsers',
-        role: gcs.acl.READER_ROLE
-      }
-    ],
-    cacheControl: 'no-cache'
-  }
+    cacheControl: 'max-age=31556926'
+  },
+  public: true,
 };
 
 const mergeDest = R.merge(DEFAULT);
