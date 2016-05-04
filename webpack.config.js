@@ -4,6 +4,7 @@
 
 const join = require('path').join;
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 const conf = require('./conf');
 
@@ -18,7 +19,7 @@ const config = {
       'http://localhost:10010/' :
       'http://static.getstarboard.xyz/',
     filename: conf.get('env') !== 'production' ?
-      'bundle.js' :
+      '[name].js' :
       '[name]-[hash].js',
   },
 
@@ -33,19 +34,27 @@ const config = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
-        exclude: /node_modules|shared/,
         loader: 'babel?presets[]=es2015&presets[]=react',
+        exclude: /node_modules|shared/,
+        test: /\.js$/,
       },
       {
-        test: /\.(jpg|png)$/,
         loader: 'file',
+        test: /\.(jpg|png)$/,
       },
       {
-        test: /\.svg$/,
         loader: 'babel?presets[]=es2015&presets[]=react!svg-react',
+        test: /\.svg$/,
+      },
+      {
+        loader: ExtractTextPlugin.extract('style', 'css!sass'),
+        test: /\.scss$/,
       },
     ]
+  },
+
+  sassLoader: {
+    outputStyle: conf.get('env') !== 'production' ? 'expanded' : 'compressed',
   },
 
   plugins: [
@@ -57,6 +66,9 @@ const config = {
     new AssetsPlugin({
       prettyPrint: true,
     }),
+    new ExtractTextPlugin(conf.get('env') !== 'production' ?
+      '[name].css' :
+      '[name]-[contenthash].css'),
   ]
 };
 

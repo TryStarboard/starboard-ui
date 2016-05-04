@@ -32,10 +32,8 @@ const DEFAULT = {
 const mergeDest = R.merge(DEFAULT);
 
 co(function *() {
-  const files = yield glob(join(__dirname, '../public/*.js*'));
+  const files = yield glob(join(__dirname, '../public/*'));
   yield Promise.all(files.map(upload));
-  yield upload(join(__dirname, '../public/index.css'));
-  yield upload(join(__dirname, '../webpack-assets.json'));
 })
 .catch(console.error);
 
