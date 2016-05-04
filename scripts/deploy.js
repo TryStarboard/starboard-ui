@@ -20,6 +20,12 @@ Promise.promisifyAll(Object.getPrototypeOf(bucket));
 const DEFAULT = {
   gzip: true,
   metadata: {
+    acl: [
+      {
+        entity: 'allUsers',
+        role: gcs.acl.READER_ROLE,
+      }
+    ],
     cacheControl: 'max-age=31556926'
   },
   public: true,
