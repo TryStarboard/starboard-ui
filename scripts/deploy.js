@@ -26,9 +26,8 @@ const DEFAULT = {
         role: gcs.acl.READER_ROLE,
       }
     ],
-    cacheControl: 'max-age=31556926'
+    cacheControl: 'max-age=31556926',
   },
-  public: true,
 };
 
 const mergeDest = R.merge(DEFAULT);
@@ -41,9 +40,9 @@ co(function *() {
 
 function upload(file) {
   console.log(`Uploading ${file}`);
-  const opts = mergeDest({
+  const opts1 = mergeDest({
     desination: basename(file),
   });
-  opts.metadata['contentType'] = mime.lookup(file);
-  return bucket.uploadAsync(file, opts);
+  const opts2 = R.assocPath(['metadata', 'Content-Type'], mime.lookup(file), opts1);
+  return bucket.uploadAsync(file, opts2);
 }
