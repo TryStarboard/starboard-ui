@@ -1,12 +1,12 @@
 'use strict';
 
 const join = require('path').join;
-const basename = require('path').basename;
+const relative = require('path').relative;
 const Promise = require('bluebird');
 const glob = Promise.promisify(require('glob'));
 const co = require('co');
+const u = require('updeep').default;
 const R = require('ramda');
-const mime = require('mime');
 const gcloud = require('gcloud')({
   projectId: 'starboard-1277',
   keyFilename: join(__dirname, '../local/starboard-ui-deploy.json'),
@@ -30,7 +30,10 @@ const DEFAULT = {
   },
 };
 
-const mergeDest = R.merge(DEFAULT);
+const mergeDefault = R.pipe(
+  u(u._, DEFAULT),
+  R.clone
+);
 
 co(function *() {
   const files = yield glob(join(__dirname, '../public/*'));
@@ -40,9 +43,8 @@ co(function *() {
 
 function upload(file) {
   console.log(`Uploading ${file}`);
-  const opts1 = mergeDest({
-    desination: basename(file),
+  const opts = mergeDefault({
+    desination: relative(join(__dirname, '../public'), file),
   });
-  const opts2 = R.assocPath(['metadata', 'Content-Type'], mime.lookup(file), opts1);
-  return bucket.uploadAsync(file, opts2);
+  return bucket.uploadAsync(file, opts);
 }
