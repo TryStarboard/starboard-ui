@@ -7,6 +7,7 @@
     "node": "5.11.0",
     "npm": "3.8.6"
   },
+  "main": "./webpack-assets.json",
   "files": [
     "public",
     "shared",
