@@ -4,12 +4,13 @@
   "author": "Daiwei Lu <daiweilu123@gmail.com> (http://daiwei.lu)",
   "license": "MIT",
   "engines": {
-    "node": "5.10.0",
-    "npm": "3.8.3"
+    "node": "5.11.0",
+    "npm": "3.8.6"
   },
   "files": [
-    "webpack-assets.json",
-    "shared"
+    "public",
+    "shared",
+    "webpack-assets.json"
   ],
   "devDependencies": {
     "assets-webpack-plugin": "3.4.0",
