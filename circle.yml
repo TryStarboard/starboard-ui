@@ -6,10 +6,5 @@ deployment:
     tag: /v[0-9]+(\.[0-9]+)*/
     commands:
       - env NODE_ENV=production npm run build
-      # Deploy to CDN
-      - mkdir -p local
-      - echo $GCLOUD_KEY_FILE | base64 --decode > ./local/starboard-ui-deploy.json
-      - npm run deploy
-      # Publish to NPM
       - echo -e "$NPM_USER\n$NPM_PASS\n$NPM_EMAIL" | npm login
       - npm publish
