@@ -9,8 +9,6 @@ import App from './components/App';
 window.Promise = Bluebird;
 
 render(
-  <StoreObserverProvider store={store}>
-    <App/>
-  </StoreObserverProvider>,
+  React.createElement(StoreObserverProvider, {store}, React.createElement(App)),
   document.getElementById('app')
 );
