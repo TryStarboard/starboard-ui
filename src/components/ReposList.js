@@ -1,18 +1,15 @@
 import React, {Component} from 'react';
 import classnames         from 'classnames';
-import observeStore       from '../higher-order-components/observeStore';
+import {observe}          from 'redux-react-observable';
 import {getAllRepos}      from '../actions';
 import Repo               from './Repo';
 import FilterBar          from './FilterBar';
 
-const createObserveComponent = observeStore(
+export default observe(
   () => ({
     repos: ['repos'],
     filters: ['filters'],
-  })
-);
-
-export default createObserveComponent(
+  }),
   class ReposList extends Component {
     componentDidMount() {
       getAllRepos();

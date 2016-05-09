@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
-import observeStore       from '../higher-order-components/observeStore';
+import {observe}          from 'redux-react-observable';
 import {removeFilter}     from '../actions';
 
-const createObserveComponent = observeStore(
-  ({tagId}) => ({tag: ['tagsById', tagId]})
-);
-
-export default createObserveComponent(
+export default observe(
+  ({tagId}) => ({tag: ['tagsById', tagId]}),
   class FilterBar extends Component {
     render() {
       const {

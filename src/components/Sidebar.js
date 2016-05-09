@@ -1,19 +1,15 @@
 import React from 'react';
 import {path} from 'ramda';
 import classnames from 'classnames';
+import {observe} from 'redux-react-observable';
 import LogoutIcon from 'svg/logout-icon.svg';
 import UserIcon from 'svg/user-icon.svg';
 import DashboardIcon from 'svg/dashboard-icon.svg';
 import RefreshIcon from 'svg/refresh-icon.svg';
 import EmailIcon from 'svg/email-icon.svg';
 import TwitterIcon from 'svg/twitter-icon.svg';
-import observeStore from '../higher-order-components/observeStore';
 import {logout, syncRepos} from '../actions';
 import Link from './Link';
-
-const createObserveComponent = observeStore(
-  () => ({routes: ['routes']})
-);
 
 const Sidebar = ({routes}) => (
   <nav className='nav'>
@@ -40,4 +36,7 @@ const Sidebar = ({routes}) => (
   </nav>
 );
 
-export default createObserveComponent(Sidebar);
+export default observe(
+  () => ({routes: ['routes']}),
+  Sidebar
+);

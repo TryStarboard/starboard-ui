@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 import {DragSource} from 'react-dnd';
-import observeStore from '../higher-order-components/observeStore';
+import {observe} from 'redux-react-observable';
 import {beginDragTag, endDragTag, selectTag} from '../actions';
-
-const createObserveComponent = observeStore(
-  ({id}) => ({tag: ['tagsById', id]})
-);
 
 class Tag extends Component {
   render() {
@@ -31,19 +27,22 @@ class Tag extends Component {
   }
 }
 
-export default createObserveComponent(DragSource(
-  'TAG',
-  {
-    beginDrag(props) {
-      beginDragTag();
-      return {tagId: props.id};
+export default observe(
+  ({id}) => ({tag: ['tagsById', id]}),
+  DragSource(
+    'TAG',
+    {
+      beginDrag(props) {
+        beginDragTag();
+        return {tagId: props.id};
+      },
+      endDrag() {
+        endDragTag();
+      },
     },
-    endDrag() {
-      endDragTag();
-    },
-  },
-  (connect, monitor) => ({
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging()
-  })
-)(Tag));
+    (connect, monitor) => ({
+      connectDragSource: connect.dragSource(),
+      isDragging: monitor.isDragging()
+    })
+  )(Tag)
+);

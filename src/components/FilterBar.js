@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
-import observeStore       from '../higher-order-components/observeStore';
+import {observe}          from 'redux-react-observable';
 import Filter             from './Filter';
 
-const createObserveComponent = observeStore(
-  () => ({filters: ['filters']})
-);
-
-export default createObserveComponent(
+export default observe(
+  () => ({filters: ['filters']}),
   class FilterBar extends Component {
     render() {
       return (

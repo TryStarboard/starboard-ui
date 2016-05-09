@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
 import {DropTarget}       from 'react-dnd';
 import classnames         from 'classnames';
-import observeStore       from '../higher-order-components/observeStore';
+import {observe}          from 'redux-react-observable';
 import {applyTagToRepo}   from '../actions';
 import RepoTag            from './RepoTag';
-
-const createObserveComponent = observeStore(
-  ({id}) => ({repo: ['reposById', id]})
-);
 
 class Repo extends Component {
   render() {
@@ -44,20 +40,23 @@ class Repo extends Component {
   }
 }
 
-export default createObserveComponent(DropTarget(
-  'TAG',
-  {
-    canDrop(props, monitor) {
-      const {tagId} = monitor.getItem();
-      return props.repo.tags.indexOf(tagId) === -1;
+export default observe(
+  ({id}) => ({repo: ['reposById', id]}),
+  DropTarget(
+    'TAG',
+    {
+      canDrop(props, monitor) {
+        const {tagId} = monitor.getItem();
+        return props.repo.tags.indexOf(tagId) === -1;
+      },
+      drop(props, monitor) {
+        const {tagId} = monitor.getItem();
+        applyTagToRepo(tagId, props.id);
+      }
     },
-    drop(props, monitor) {
-      const {tagId} = monitor.getItem();
-      applyTagToRepo(tagId, props.id);
-    }
-  },
-  (connect, monitor) => ({
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.canDrop() && monitor.isOver(),
-  })
-)(Repo));
+    (connect, monitor) => ({
+      connectDropTarget: connect.dropTarget(),
+      isOver: monitor.canDrop() && monitor.isOver(),
+    })
+  )(Repo)
+);

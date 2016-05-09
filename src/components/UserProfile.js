@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
-import observeStore from '../higher-order-components/observeStore';
+import {observe} from 'redux-react-observable';
 import {deleteAccount} from '../actions';
 
-const createObserveComponent = observeStore(
-  () => ({user: ['user']})
-);
-
-export default createObserveComponent(
+export default observe(
+  () => ({user: ['user']}),
   class UserProfile extends Component {
     render() {
       const {

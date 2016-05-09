@@ -1,18 +1,9 @@
-import React, {Component}                                 from 'react';
-import classnames                                         from 'classnames';
-import {DropTarget}                                       from 'react-dnd';
-import observeStore                                       from '../higher-order-components/observeStore';
+import React, {Component} from 'react';
+import classnames from 'classnames';
+import {DropTarget} from 'react-dnd';
+import {observe} from 'redux-react-observable';
 import {getAllTags, addTag, deleteTag, changeAddTagInput} from '../actions';
-import Tag                                                from './Tag';
-
-const createObserveComponent = observeStore(
-  () => ({
-    tags: ['tags'],
-    errorMsg: ['ui', 'addTagErrorMsg'],
-    isDraggingTag: ['ui', 'isDraggingTag'],
-    inputValue: ['ui', 'tagInputValue'],
-  })
-);
+import Tag from './Tag';
 
 class TagsSideBar extends Component {
   componentDidMount() {
@@ -83,15 +74,23 @@ class TagsSideBar extends Component {
   }
 }
 
-export default createObserveComponent(DropTarget(
-  'TAG',
-  {
-    drop(props, monitor) {
-      deleteTag(monitor.getItem());
-    }
-  },
-  (connect, monitor) => ({
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-  })
-)(TagsSideBar));
+export default observe(
+  () => ({
+    tags: ['tags'],
+    errorMsg: ['ui', 'addTagErrorMsg'],
+    isDraggingTag: ['ui', 'isDraggingTag'],
+    inputValue: ['ui', 'tagInputValue'],
+  }),
+  DropTarget(
+    'TAG',
+    {
+      drop(props, monitor) {
+        deleteTag(monitor.getItem());
+      }
+    },
+    (connect, monitor) => ({
+      connectDropTarget: connect.dropTarget(),
+      isOver: monitor.isOver(),
+    })
+  )(TagsSideBar)
+);
