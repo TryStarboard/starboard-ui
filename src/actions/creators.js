@@ -1,5 +1,6 @@
 import axios     from 'axios';
 import validate  from 'validate.js';
+import Bluebird  from 'bluebird';
 import {collect} from '../helpers/form';
 import mixpanel  from '../mixpanel';
 
@@ -22,7 +23,7 @@ export function getCurrentUser() {
   return {
     type: GET_CURRENT_USER,
     payload: {
-      promise: axios.get('/api/v1/me')
+      promise: Bluebird.resolve(axios.get('/api/v1/me'))
         .tap(({data: user}) => mixpanel.identify(user.id)),
     }
   };

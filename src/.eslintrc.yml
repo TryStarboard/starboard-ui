@@ -1,5 +1,7 @@
 parserOptions:
   sourceType: module
+  ecmaFeatures:
+    experimentalObjectRestSpread: true
 
 env:
   browser: true

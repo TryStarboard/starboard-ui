@@ -7,7 +7,7 @@ import {DEFAULT_TAG_COLORS} from './const/DEFAULT_TAG_COLORS';
 //
 function createStateTransformer(transforms) {
   const transformPairs = toPairs(transforms);
-  return function (state) {
+  return (state) => {
     const newStatePairs = transformPairs.map(([ key, transform ]) => [ key, transform(state) ]);
     return fromPairs(newStatePairs);
   };
@@ -23,6 +23,14 @@ const assignDefaultColorToTag = (tag) => {
     foreground_color: colors.fg,
   });
 };
+
+const selectReposById = createSelector(
+  prop('reposById'),
+  prop('tagsById'),
+  (reposById, tagsById) => {
+    return map(u({tags: map((tagId) => tagsById[tagId])}), reposById);
+  }
+);
 
 const selectRepos = createSelector(
   prop('filters'),
@@ -41,15 +49,6 @@ const selectRepos = createSelector(
   }
 );
 
-const updateTagsStateAffectedByFilter = createSelector(
-  prop('filters'),
-  prop('tagsById'),
-  (filters, tagsById) => {
-    const updates = fromPairs(filters.map((tagId) => [tagId, {isSelected: true}]));
-    return u(updates, tagsById);
-  }
-);
-
 const selectTags = createSelector(
   prop('filters'),
   prop('tagsById'),
@@ -63,30 +62,26 @@ const selectTags = createSelector(
       )),
       sortBy(prop('id')),
       reverse,
-      map(prop('id'))
+      map(assignDefaultColorToTag)
     )(tagsById);
   }
 );
 
-/**
-interface ComputedStoreShape {
-  filters   : number[];
-  reposById : { [key string] : Repo };
-  repos     : number[];
-  routes    : RouteShape;
-  tagsById  : { [key string] : Tag },
-  tags      : number[];
-  ui        : UIShape;
-  user      : UserShape;
-}
-*/
+const selectFilters = createSelector(
+  prop('filters'),
+  prop('tagsById'),
+  (filters, tagsById) => {
+    return pipe(
+      map((tagId) => tagsById[tagId])
+    )(filters);
+  }
+);
 
 export default createStateTransformer({
-  filters: prop('filters'),
-  reposById: prop('reposById'),
+  filters: selectFilters,
+  reposById: selectReposById,
   repos: selectRepos,
   routes: prop('routes'),
-  tagsById: pipe(updateTagsStateAffectedByFilter, map(assignDefaultColorToTag)),
   tags: selectTags,
   ui: prop('ui'),
   user: prop('user'),

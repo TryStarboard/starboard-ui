@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import classnames from 'classnames';
-import {DropTarget} from 'react-dnd';
-import {observe} from 'redux-react-observable';
-import {getAllTags, addTag, deleteTag, changeAddTagInput} from '../actions';
+import {connect} from 'react-redux';
+import {getAllTags, addTag, changeAddTagInput} from '../actions';
 import Tag from './Tag';
+import DeleteZone from './DeleteZone';
 
 class TagsSideBar extends Component {
   componentDidMount() {
@@ -11,34 +11,20 @@ class TagsSideBar extends Component {
   }
 
   render() {
-    const {
-      isDraggingTag,
-      connectDropTarget,
-      isOver,
-      errorMsg,
-      inputValue,
-    } = this.props;
+    const {isDraggingTag, errorMsg, inputValue} = this.props;
 
     let inputContent;
 
     if (isDraggingTag) {
-      const dropTarget = connectDropTarget(
-        <div className={classnames('dashboard__tags-input-delete-zone', {
-          'dashboard__tags-input-delete-zone--over': isOver,
-        })}></div>
-      );
-
       inputContent = (
         <div>
-          {dropTarget}
+          <DeleteZone/>
           <div className='dashboard__tags-input-helper-text'>
             Drag here to delete
           </div>
         </div>
       );
     } else {
-      const helperMsg = errorMsg || 'Type tag name, hit Enter to create new tag';
-
       inputContent = (
         <form onSubmit={addTag} autoComplete='off'>
           <input
@@ -51,7 +37,7 @@ class TagsSideBar extends Component {
           <div className={classnames('dashboard__tags-input-helper-text', {
             'dashboard__tags-input-helper-text--error': errorMsg,
           })}>
-            {helperMsg}
+            {errorMsg || 'Type tag name, hit Enter to create new tag'}
           </div>
         </form>
       );
@@ -63,7 +49,7 @@ class TagsSideBar extends Component {
           {inputContent}
         </div>
         <div className='dashboard__tags-tag-list'>
-          {this.props.tags.map((id) => <Tag id={id} key={id} />)}
+          {this.props.tags.map((tag) => <Tag tag={tag} key={tag.id}/>)}
         </div>
         <div className="dashboard__tags-tip-box">
           <div className="dashboard__tags-tip-box-arrow"></div>
@@ -74,23 +60,14 @@ class TagsSideBar extends Component {
   }
 }
 
-export default observe(
-  () => ({
-    tags: ['tags'],
-    errorMsg: ['ui', 'addTagErrorMsg'],
-    isDraggingTag: ['ui', 'isDraggingTag'],
-    inputValue: ['ui', 'tagInputValue'],
+export default connect(
+  ({tags, ui}) => ({
+    tags,
+    errorMsg: ui.addTagErrorMsg,
+    isDraggingTag: ui.isDraggingTag,
+    inputValue: ui.tagInputValue,
   }),
-  DropTarget(
-    'TAG',
-    {
-      drop(props, monitor) {
-        deleteTag(monitor.getItem());
-      }
-    },
-    (connect, monitor) => ({
-      connectDropTarget: connect.dropTarget(),
-      isOver: monitor.isOver(),
-    })
-  )(TagsSideBar)
-);
+  null,
+  null,
+  {pure: true}
+)(TagsSideBar);
