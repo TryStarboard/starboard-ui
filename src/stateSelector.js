@@ -28,7 +28,15 @@ const selectReposById = createSelector(
   prop('reposById'),
   prop('tagsById'),
   (reposById, tagsById) => {
-    return map(u({tags: map((tagId) => tagsById[tagId])}), reposById);
+    return map(
+      u({
+        tags: map((tagId) => {
+          const tag = tagsById[tagId];
+          return tag ? assignDefaultColorToTag(tag) : {};
+        })
+      }),
+      reposById
+    );
   }
 );
 
