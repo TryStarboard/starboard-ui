@@ -1,7 +1,7 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {path} from 'ramda';
 import classnames from 'classnames';
-import {observe} from 'redux-react-observable';
 import LogoutIcon from 'svg/logout-icon.svg';
 import UserIcon from 'svg/user-icon.svg';
 import DashboardIcon from 'svg/dashboard-icon.svg';
@@ -36,7 +36,6 @@ const Sidebar = ({routes}) => (
   </nav>
 );
 
-export default observe(
-  () => ({routes: ['routes']}),
-  Sidebar
-);
+export default connect(
+  ({routes}) => ({routes})
+)(Sidebar);

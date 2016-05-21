@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
+import {connect}          from 'react-redux';
 import {DropTarget}       from 'react-dnd';
 import classnames         from 'classnames';
-import {observe}          from 'redux-react-observable';
+import {equals}           from 'ramda';
 import {applyTagToRepo}   from '../actions';
 import RepoTag            from './RepoTag';
 
 class Repo extends Component {
+  shouldComponentUpdate({isOver, repo}) {
+    return isOver !== this.props.isOver || !equals(repo, this.props.repo);
+  }
+
   render() {
     const {
       id: repoId,
@@ -20,7 +25,7 @@ class Repo extends Component {
     if (tags.length) {
       tagsSection = (
         <ul className="repo__tags">
-          {tags.map((id) => <RepoTag tagId={id} repoId={repoId} key={id}/>)}
+          {tags.map((tag) => <RepoTag tag={tag} repoId={repoId} key={tag.id}/>)}
         </ul>
       );
     }
@@ -40,23 +45,25 @@ class Repo extends Component {
   }
 }
 
-export default observe(
-  ({id}) => ({repo: ['reposById', id]}),
-  DropTarget(
-    'TAG',
-    {
-      canDrop(props, monitor) {
-        const {tagId} = monitor.getItem();
-        return props.repo.tags.indexOf(tagId) === -1;
-      },
-      drop(props, monitor) {
-        const {tagId} = monitor.getItem();
-        applyTagToRepo(tagId, props.id);
-      }
+export default connect(
+  (initialState, {id}) => ({reposById}) => ({repo: reposById[id]}),
+  null,
+  null,
+  {pure: true}
+)(DropTarget(
+  'TAG',
+  {
+    canDrop(props, monitor) {
+      const {tagId} = monitor.getItem();
+      return !props.repo.tags.find(({id}) => id === tagId);
     },
-    (connect, monitor) => ({
-      connectDropTarget: connect.dropTarget(),
-      isOver: monitor.canDrop() && monitor.isOver(),
-    })
-  )(Repo)
-);
+    drop(props, monitor) {
+      const {tagId} = monitor.getItem();
+      applyTagToRepo(tagId, props.id);
+    }
+  },
+  (connector, monitor) => ({
+    connectDropTarget: connector.dropTarget(),
+    isOver: monitor.canDrop() && monitor.isOver(),
+  })
+)(Repo));

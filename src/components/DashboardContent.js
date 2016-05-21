@@ -9,9 +9,9 @@ class DashboardContent extends Component {
   render() {
     return (
       <div className='dashboard__content'>
-        <TagsSideBar />
-        <ReposList />
-        <RepoTagDragLayer />
+        <TagsSideBar/>
+        <ReposList/>
+        <RepoTagDragLayer/>
       </div>
     );
   }

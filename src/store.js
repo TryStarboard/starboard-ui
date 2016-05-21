@@ -4,7 +4,6 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
 import thunk             from 'redux-thunk';
-import {identity}        from 'ramda';
 import stateSelector     from './stateSelector';
 import filters           from './reducers/filters';
 import reposById         from './reducers/reposById';
@@ -13,42 +12,56 @@ import tagsById          from './reducers/tagsById';
 import ui                from './reducers/ui';
 import user              from './reducers/user';
 
-const middlewares = [promiseMiddleware(), thunk];
+// Reducer
+// --------------------
 
-if (process.env.NODE_ENV !== 'production') {
-  middlewares.push(require('redux-logger')());
-}
-
-const middleware = applyMiddleware.apply(this, middlewares);
-
-let createStoreWithMiddleware;
-
-if (process.env.NODE_ENV !== 'production') {
-  const reduxDevtool =
-    typeof window.devToolsExtension !== 'undefined' ?
-      window.devToolsExtension() : identity;
-  createStoreWithMiddleware = compose(middleware, reduxDevtool)(createStore);
-} else {
-  createStoreWithMiddleware = compose(middleware)(createStore);
-}
-
-const store = createStoreWithMiddleware(combineReducers({
+const reducers = combineReducers({
   filters,
   reposById,
   routes,
   tagsById,
   ui,
   user,
-}));
+});
 
-// Transform original state tree from store
-//
-const _getState = store.getState;
+// Enhancer
+// --------------------
 
-store.getState = function () {
-  const state = _getState.call(store);
-  const transformedState = stateSelector(state);
-  return transformedState;
-};
+const middlewares = [promiseMiddleware(), thunk];
+
+if (process.env.NODE_ENV !== 'production') {
+  middlewares.push(require('redux-logger')());
+}
+
+function applyTransformState(transform) {
+  return (_createStore) => (reducer, initialState, enhancer) => {
+    const store = _createStore(reducer, initialState, enhancer);
+    return {
+      ...store,
+      getState: () => transform(store.getState())
+    };
+  };
+}
+
+// Store
+// --------------------
+
+const store = createStore(
+  reducers,
+  {},
+  compose(
+    applyMiddleware(...middlewares),
+    applyTransformState(stateSelector)
+  )
+);
+
+// if (process.env.NODE_ENV !== 'production') {
+//   const reduxDevtool =
+//     typeof window.devToolsExtension !== 'undefined' ?
+//       window.devToolsExtension() : identity;
+//   createStoreWithMiddleware = compose(middleware, reduxDevtool)(createStore);
+// } else {
+//   createStoreWithMiddleware = compose(middleware)(createStore);
+// }
 
 export {store as default};

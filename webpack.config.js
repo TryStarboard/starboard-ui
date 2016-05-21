@@ -34,7 +34,7 @@ const config = {
   module: {
     loaders: [
       {
-        loader: 'babel?presets[]=es2015&presets[]=react',
+        loader: 'babel?presets[]=es2015&presets[]=react&plugins[]=transform-object-rest-spread',
         exclude: /node_modules|shared/,
         test: /\.js$/,
       },
