@@ -1,11 +1,7 @@
 import React from 'react';
 import {removeFilter} from '../actions';
 
-const Filter = (props) => {
-  const {
-    tag: {id, background_color, foreground_color, text} = {},
-  } = this.props;
-
+const Filter = ({tag: {id, background_color, foreground_color, text}}) => {
   const style = {
     backgroundColor: background_color,
     color: foreground_color,

@@ -96,21 +96,16 @@
       left: 0;
       width: 100%;
       bottom: 0;
-      padding: 20px 0 0 20px;
-      overflow: auto;
+      padding-left: 20px;
       background-color: white;
-
-      transition: top 400ms;
 
       &.dashboard__repos-list--no-filter {
         top: 0;
       }
-    }
 
-    .dashboard__repos-list-inner {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      [role=grid] {
+        outline: none;
+      }
     }
 
     .dashboard__repo-tag-drag-layer {
