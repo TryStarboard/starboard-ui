@@ -34,21 +34,33 @@ const config = {
   module: {
     loaders: [
       {
-        loader: 'babel?presets[]=es2015&presets[]=react&plugins[]=transform-object-rest-spread',
-        exclude: /node_modules|shared/,
         test: /\.js$/,
+        exclude: /node_modules|shared/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015', 'react'],
+          plugins: conf.get('env') !== 'production' ?
+          [
+            'transform-object-rest-spread',
+          ] :
+          [
+            'transform-object-rest-spread',
+            'transform-react-constant-elements',
+            'transform-react-inline-elements',
+          ]
+        }
       },
       {
-        loader: 'file',
         test: /\.(jpg|png)$/,
+        loader: 'file',
       },
       {
-        loader: 'babel?presets[]=es2015&presets[]=react!svg-react',
         test: /\.svg$/,
+        loader: 'babel?presets[]=es2015&presets[]=react!svg-react',
       },
       {
+        test: /\.(scss|css)$/,
         loader: ExtractTextPlugin.extract('style', 'css!sass'),
-        test: /\.scss$/,
       },
     ]
   },

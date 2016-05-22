@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect}          from 'react-redux';
 import classnames         from 'classnames';
+import {Grid, AutoSizer}  from 'react-virtualized';
 import {getAllRepos}      from '../actions';
 import Repo               from './Repo';
 import FilterBar          from './FilterBar';
@@ -8,9 +9,33 @@ import FilterBar          from './FilterBar';
 class ReposListContent extends Component {
   render() {
     return (
-      <div className='dashboard__repos-list-inner'>
-        {this.props.repos.map((id) => <Repo id={id} key={id}/>)}
-      </div>
+      <AutoSizer>
+        {({height, width}) => {
+          const columnCount = Math.floor(width / 290);
+          const rowCount = Math.ceil(this.props.repos.length / columnCount);
+
+          const cellRenderer = ({columnIndex, rowIndex}) => {
+            const index = rowIndex * columnCount + columnIndex;
+            if (index >= this.props.repos.length) {
+              return null;
+            }
+            const repoId = this.props.repos[index];
+            return <Repo id={repoId} key={repoId}/>;
+          };
+
+          return (
+            <Grid
+              columnWidth={290}
+              columnCount={columnCount}
+              rowHeight={200}
+              rowCount={rowCount}
+              width={width}
+              height={height}
+              cellRenderer={cellRenderer}
+            />
+          );
+        }}
+      </AutoSizer>
     );
   }
 }
