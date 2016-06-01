@@ -4,7 +4,7 @@
 
   @at-root {
     .app__inside {
-      height: 100vh;
+      height: 100%;
       display: flex;
       flex-direction: row;
     }
@@ -20,6 +20,12 @@
     .app__repos,
     .app__user-profile {
       flex-grow: 1;
+    }
+
+    @media (max-width: $side-bar-width + $tags-side-bar-width + 290px + 20px - 1px) {
+      .app__tags {
+        display: none;
+      }
     }
   }
 }

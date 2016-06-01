@@ -11,7 +11,8 @@ class ReposListContent extends Component {
     return (
       <AutoSizer>
         {({height, width}) => {
-          const columnCount = Math.floor(width / 290);
+          const cellWidth = Math.min(290, width);
+          const columnCount = Math.floor(width / cellWidth);
           const rowCount = Math.ceil(this.props.repos.length / columnCount);
 
           const cellRenderer = ({columnIndex, rowIndex}) => {
@@ -25,7 +26,7 @@ class ReposListContent extends Component {
 
           return (
             <Grid
-              columnWidth={290}
+              columnWidth={cellWidth}
               columnCount={columnCount}
               rowHeight={200}
               rowCount={rowCount}
