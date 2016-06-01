@@ -44,7 +44,7 @@ class TagsSideBar extends Component {
     }
 
     return (
-      <div className='dashboard__tags'>
+      <div className='dashboard__tags app__tags'>
         <div className='dashboard__tags-input-wrapper'>
           {inputContent}
         </div>

@@ -47,7 +47,7 @@ class ReposList extends Component {
 
   render() {
     return (
-      <div className='dashboard__repos'>
+      <div className='dashboard__repos app__repos'>
         <FilterBar filters={this.props.filters}/>
         <div className={classnames('dashboard__repos-list', {
           'dashboard__repos-list--no-filter': this.props.filters.length === 0,

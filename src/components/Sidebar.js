@@ -12,7 +12,7 @@ import {logout, syncRepos} from '../actions';
 import Link from './Link';
 
 const Sidebar = ({routes}) => (
-  <nav className='nav'>
+  <nav className='nav app__nav'>
     <div className='nav__top'>
       <Link to='/user-profile' className={
         classnames('nav__btn', {'nav__btn--active': path(['root', 'user_profile'], routes)})

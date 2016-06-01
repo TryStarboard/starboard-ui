@@ -1,5 +1,4 @@
 .dashboard {
-  $tags-side-bar-width: 316px;
   $input-height: 38px;
 
   margin-left: $side-bar-width;
@@ -13,11 +12,6 @@
     }
 
     .dashboard__tags {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: $tags-side-bar-width;
-      height: 100vh;
       overflow: auto;
       padding: 30px;
       background-color: #F9F9F9;
@@ -76,12 +70,8 @@
     }
 
     .dashboard__repos {
-      position: absolute;
+      position: relative;
       z-index: 0;
-      top: 0;
-      left: $tags-side-bar-width;
-      right: 0;
-      height: 100vh;
     }
 
     .dashboard__filters {

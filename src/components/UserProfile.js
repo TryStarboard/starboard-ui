@@ -9,7 +9,7 @@ class UserProfile extends Component {
     } = this.props;
 
     return (
-      <div className='userprofile'>
+      <div className='userprofile app__user-profile'>
         <img className='userprofile__avatar' src={ avatar }></img>
         <h3 className='userprofile__displayname'>{ displayname }</h3>
         <h6 className='userprofile__email'>Email: { email }</h6>

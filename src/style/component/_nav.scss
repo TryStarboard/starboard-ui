@@ -3,11 +3,6 @@
   $btn-edge-length: 34px;
   $padding: ($width - $btn-edge-length) / 2;
 
-  position: absolute;
-  left: 0;
-  width: $width;
-  top: 0;
-  height: 100vh;
   background-color: #333333;
   padding: 0 $padding;
 
