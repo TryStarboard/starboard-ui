@@ -1,7 +1,6 @@
 import axios     from 'axios';
 import validate  from 'validate.js';
 import Bluebird  from 'bluebird';
-import {collect} from '../helpers/form';
 import mixpanel  from '../mixpanel';
 
 export const GET_CURRENT_USER      = 'GET_CURRENT_USER';
@@ -50,33 +49,30 @@ export function getAllTags() {
 export function addTag(event) {
   event.preventDefault();
 
-  const inputs = collect(event.target);
-  const errors = validate(inputs, {
-    tag_text: {
-      presence: true,
-    },
-  });
+  return (dispatch, getState) => {
+    const {ui: {tagInputValue: tagText}} = getState();
 
-  if (errors != null) {
-    return {
-      type: ADD_TAG_INVALID_INPUT,
-      payload: errors.tag_text[0],
-    };
-  }
-
-  return function (dispatch) {
     mixpanel.track(ADD_TAG);
 
-    dispatch({
-      type: ADD_TAG,
-      payload: {
-        promise: axios.post('/api/v1/tags', {name: inputs.tag_text}),
-      },
-    });
+    const errors = validate({tag_text: tagText}, {tag_text: {presence: true}});
 
-    dispatch({
-      type: ADD_TAG_RESET_MESSAGE,
-    });
+    if (errors != null) {
+      dispatch({
+        type: ADD_TAG_INVALID_INPUT,
+        payload: errors.tag_text[0],
+      });
+    } else {
+      dispatch({
+        type: ADD_TAG,
+        payload: {
+          promise: axios.post('/api/v1/tags', {name: tagText}),
+        },
+      });
+
+      dispatch({
+        type: ADD_TAG_RESET_MESSAGE,
+      });
+    }
   };
 }
 
@@ -142,10 +138,10 @@ export function selectTag(tagId) {
   };
 }
 
-export function removeFilter(tagId) {
+export function removeFilter(filterIndex) {
   mixpanel.track(REMOVE_FILTER);
   return {
     type: REMOVE_FILTER,
-    payload: {tagId},
+    payload: {filterIndex},
   };
 }

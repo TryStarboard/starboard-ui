@@ -10,4 +10,9 @@
   cursor: pointer;
   font-size: 12px;
   line-height: 14px;
+
+  &--action {
+    background-color: #89E051;
+    font-weight: 900;
+  }
 }
