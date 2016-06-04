@@ -1,7 +1,11 @@
-import {prop, values, map, pipe, merge, sortBy, reverse, toPairs, fromPairs, contains, filter, all, not, __} from 'ramda';
+import {
+  prop, values, map, pipe, merge, sortBy, reverse, toPairs, fromPairs, contains,
+  filter, not, allPass, any, __
+} from 'ramda';
 import {createSelector}     from 'reselect';
 import u                    from 'updeep';
 import {DEFAULT_TAG_COLORS} from './const/DEFAULT_TAG_COLORS';
+import {TAG_FILTER}         from './reducers/filters/CONST';
 
 // Helpers
 //
@@ -44,12 +48,21 @@ const selectRepos = createSelector(
   prop('filters'),
   prop('reposById'),
   (filters, reposById) => {
+    const isPassAllFilter = allPass(filters.map((filterObj) => {
+      if (filterObj.type === TAG_FILTER) {
+        return pipe(prop('tags'), contains(filterObj.tagId));
+      } else {
+        return ({full_name, description, tags}) => {
+          return full_name.indexOf(filterObj.text) > -1 ||
+            (description && description.indexOf(filterObj.text) > -1) ||
+            any(contains(filterObj.text), tags);
+        };
+      }
+    }));
+
     return pipe(
       values,
-      filter(pipe(
-        prop('tags'),
-        (tags) => all(contains(__, tags), filters)
-      )),
+      filter(isPassAllFilter),
       sortBy(prop('starred_at')),
       reverse,
       map(prop('id'))
@@ -80,7 +93,16 @@ const selectFilters = createSelector(
   prop('tagsById'),
   (filters, tagsById) => {
     return pipe(
-      map((tagId) => tagsById[tagId])
+      map((filterObj) => {
+        if (filterObj.type === TAG_FILTER) {
+          return {
+            ...filterObj,
+            tag: assignDefaultColorToTag(tagsById[filterObj.tagId]),
+          };
+        } else {
+          return filterObj;
+        }
+      })
     )(filters);
   }
 );

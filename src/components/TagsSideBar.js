@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import classnames from 'classnames';
 import {connect} from 'react-redux';
-import {getAllTags, addTag, changeAddTagInput} from '../actions';
+import {getAllTags, changeAddTagInput} from '../actions';
 import Tag from './Tag';
+import ActionTag from './ActionTag';
 import DeleteZone from './DeleteZone';
 
 class TagsSideBar extends Component {
@@ -26,18 +27,18 @@ class TagsSideBar extends Component {
       );
     } else {
       inputContent = (
-        <form onSubmit={addTag} autoComplete='off'>
+        <form onSubmit={(event) => event.preventDefault()} autoComplete='off'>
           <input
             type='text'
             name='tag_text'
             className='dashboard__tags-input'
-            placeholder='Create new tag...'
+            placeholder='Type to search...'
             value={inputValue}
             onChange={changeAddTagInput}/>
           <div className={classnames('dashboard__tags-input-helper-text', {
             'dashboard__tags-input-helper-text--error': errorMsg,
           })}>
-            {errorMsg || 'Type tag name, hit Enter to create new tag'}
+            {errorMsg || 'Type anything to search among repos'}
           </div>
         </form>
       );
@@ -49,6 +50,9 @@ class TagsSideBar extends Component {
           {inputContent}
         </div>
         <div className='dashboard__tags-tag-list'>
+          {(() => {
+            return inputValue ? <ActionTag text={inputValue}/> : null;
+          })()}
           {this.props.tags.map((tag) => <Tag tag={tag} key={tag.id}/>)}
         </div>
         <div className="dashboard__tags-tip-box">
