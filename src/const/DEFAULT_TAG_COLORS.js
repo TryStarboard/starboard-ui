@@ -47,6 +47,10 @@ export const DEFAULT_TAG_COLORS = {
     bg: '#438EFF',
     fg: 'white'
   },
+  'objective-c++': {
+    bg: '#438EFF',
+    fg: 'white'
+  },
   'objective-j': {
     bg: '#FF0C5A',
     fg: 'white'
@@ -61,7 +65,7 @@ export const DEFAULT_TAG_COLORS = {
   },
   shell: {
     bg: '#89E051',
-    fg: 'white'
+    fg: 'black'
   },
   swift: {
     bg: '#FFAC45',
@@ -70,5 +74,41 @@ export const DEFAULT_TAG_COLORS = {
   typescript: {
     bg: '#2B7489',
     fg: 'white'
+  },
+  'c#': {
+    bg: '#178600',
+    fg: 'white',
+  },
+  'ocaml': {
+    bg: '#3BE133',
+    fg: 'black',
+  },
+  'lua': {
+    bg: '#000080',
+    fg: 'white',
+  },
+  'rust': {
+    bg: '#DEA584',
+    fg: 'black',
+  },
+  'c++': {
+    bg: '#F34B7D',
+    fg: 'white',
+  },
+  'perl': {
+    bg: '#0298C3',
+    fg: 'white',
+  },
+  'haskell': {
+    bg: '#29B544',
+    fg: 'white',
+  },
+  'makefile': {
+    bg: '#427819',
+    fg: 'white',
+  },
+  'viml': {
+    bg: '#199F4B',
+    fg: 'white',
   },
 };
