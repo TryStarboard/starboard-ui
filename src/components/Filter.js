@@ -1,5 +1,5 @@
 import React from 'react';
-import {TAG_FILTER} from '../reducers/filters/CONST';
+import {TAG_FILTER} from '../const/FILTER_TYPES';
 import {removeFilter} from '../actions';
 
 const Filter = ({filter, index}) => {

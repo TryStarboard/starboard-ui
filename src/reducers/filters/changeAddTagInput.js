@@ -1,6 +1,6 @@
 import u from 'updeep';
 import {append, reject, findIndex, propEq} from 'ramda';
-import {TEXT_FILTER} from './CONST';
+import {TEXT_FILTER} from '../../const/FILTER_TYPES';
 
 export default function changeAddTagInput(state, payload) {
   if (payload) {

@@ -7,7 +7,7 @@ import {
   CHNAGE_ADD_TAG_INPUT
 } from '../../actions/creators';
 import changeAddTagInput from './changeAddTagInput';
-import {TAG_FILTER} from './CONST';
+import {TAG_FILTER} from '../../const/FILTER_TYPES';
 
 export default function (state = [], {type, payload}) {
   switch (type) {

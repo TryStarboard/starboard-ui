@@ -5,7 +5,7 @@ import {
 import {createSelector}     from 'reselect';
 import u                    from 'updeep';
 import {DEFAULT_TAG_COLORS} from './const/DEFAULT_TAG_COLORS';
-import {TAG_FILTER}         from './reducers/filters/CONST';
+import {TAG_FILTER}         from './const/FILTER_TYPES';
 
 // Helpers
 //
