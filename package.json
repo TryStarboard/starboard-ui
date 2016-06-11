@@ -25,7 +25,7 @@
     "classnames": "2.2.5",
     "convict": "1.4.0",
     "css-loader": "0.23.1",
-    "eslint": "2.11.1",
+    "eslint": "2.12.0",
     "eslint-plugin-node": "1.4.0",
     "eslint-plugin-react": "5.1.1",
     "extract-text-webpack-plugin": "1.0.1",
