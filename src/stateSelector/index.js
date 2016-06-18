@@ -16,8 +16,8 @@ export default createStateTransformer({
   filters,
   reposById,
   repos,
-  routes: prop('routes'),
   tags,
   ui: prop('ui'),
   user: prop('user'),
+  routing: prop('routing'),
 });

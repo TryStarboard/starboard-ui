@@ -1,32 +1,21 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {path} from 'ramda';
-import classnames from 'classnames';
+import {Link} from 'react-router';
+
 import LogoutIcon from 'svg/logout-icon.svg';
 import UserIcon from 'svg/user-icon.svg';
 import DashboardIcon from 'svg/dashboard-icon.svg';
 import RefreshIcon from 'svg/refresh-icon.svg';
 import EmailIcon from 'svg/email-icon.svg';
 import TwitterIcon from 'svg/twitter-icon.svg';
-import {logout, syncRepos} from '../actions';
-import Link from './Link';
 
-const Sidebar = ({routes}) => (
+import {logout, syncRepos} from '../actions';
+
+const Sidebar = () => (
   <nav className='nav app__nav'>
     <div className='nav__top'>
-      <Link to='/user-profile' className={
-        classnames('nav__btn', {'nav__btn--active': path(['root', 'user_profile'], routes)})
-      }>
-        <UserIcon/>
-      </Link>
-      <Link to='/dashboard' className={
-        classnames('nav__btn', {'nav__btn--active': path(['root', 'dashboard'], routes)})
-      }>
-        <DashboardIcon/>
-      </Link>
-      <button className='nav__btn' onClick={syncRepos}>
-        <RefreshIcon/>
-      </button>
+      <Link to='/user-profile' className='nav__btn' activeClassName='nav__btn--active'><UserIcon/></Link>
+      <Link to='/dashboard' className='nav__btn' activeClassName='nav__btn--active'><DashboardIcon/></Link>
+      <button className='nav__btn' onClick={syncRepos}><RefreshIcon/></button>
     </div>
     <div className='nav__bottom'>
       <a className='nav__btn' href='http://twitter.com/home/?status=www.getstarboard.xyz is an awesome free webapp to manage Github starred repos. And it is open sourced on Github!' target='_blank'><TwitterIcon/></a>
@@ -36,6 +25,4 @@ const Sidebar = ({routes}) => (
   </nav>
 );
 
-export default connect(
-  ({routes}) => ({routes})
-)(Sidebar);
+export {Sidebar as default};

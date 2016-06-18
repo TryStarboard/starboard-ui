@@ -3,6 +3,8 @@ import validate  from 'validate.js';
 import Bluebird  from 'bluebird';
 import mixpanel  from '../mixpanel';
 
+import {LOGOUT, DELETE_ACCOUNT} from '../../shared/action-types';
+
 export const GET_CURRENT_USER      = 'GET_CURRENT_USER';
 export const GET_ALL_REPOS         = 'GET_ALL_REPOS';
 export const GET_ALL_TAGS          = 'GET_ALL_TAGS';
@@ -143,5 +145,33 @@ export function removeFilter(filterIndex) {
   return {
     type: REMOVE_FILTER,
     payload: {filterIndex},
+  };
+}
+
+export function logout() {
+  mixpanel.track(LOGOUT);
+  return {
+    type: LOGOUT,
+    payload: {
+      promise: Bluebird
+        .resolve(axios.get('/api/v1/logout'))
+        .tap(() => {
+          window.location = '/';
+        }),
+    }
+  };
+}
+
+export function deleteAccount() {
+  mixpanel.track(DELETE_ACCOUNT);
+  return {
+    type: DELETE_ACCOUNT,
+    payload: {
+      promise: Bluebird
+        .resolve(axios.delete('/api/v1/account'))
+        .tap(() => {
+          window.location = '/';
+        }),
+    }
   };
 }
