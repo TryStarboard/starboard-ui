@@ -8,6 +8,12 @@ const conf = convict({
     default: 'development',
     format: ['development', 'test', 'production'],
   },
+  websocket: {
+    host: {
+      env: 'WEBSOCKET_HOST',
+      default: 'http://localhost:10010',
+    }
+  },
   mixpanel: {
     token: {
       env: 'MIXPANEL_TOKEN',

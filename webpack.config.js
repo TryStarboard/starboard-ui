@@ -66,6 +66,7 @@ const config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(conf.get('env')),
       'MIXPANEL_TOKEN': JSON.stringify(conf.get('mixpanel.token')),
+      '__WEBSOCKET_HOST__': JSON.stringify(conf.get('websocket.host')),
     }),
     new AssetsPlugin({
       prettyPrint: true,

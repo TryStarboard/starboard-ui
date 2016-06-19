@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 import {UPDATE_SOME_REPOS, REMOVE_REPOS, UPDATE_TAGS, UPDATE_PROGRESS} from '../shared/action-types';
 import {updateSomeRepos, removeRepos, updateTags, updateProgress} from './actions-server';
 
-const socket = io();
+const socket = io(__WEBSOCKET_HOST__);
 
 // TODO: handle event emitting when connection is not ready yet
 
