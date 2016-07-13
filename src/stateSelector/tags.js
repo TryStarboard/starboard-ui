@@ -20,7 +20,7 @@ export default createSelector(
         contains(__, selectedTagIds),
         not
       )),
-      sortBy(prop('id')),
+      sortBy(prop('updated_at')),
       reverse,
       map(assignDefaultColorToTag)
     )(tagsById);
