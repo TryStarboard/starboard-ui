@@ -17,7 +17,7 @@ const config = {
     path: join(__dirname, 'public'),
     publicPath: conf.get('env') !== 'production' ?
       '/' :
-      'https://www.getstarboard.xyz/',
+      'https://static.getstarboard.xyz/',
     filename: conf.get('env') !== 'production' ?
       '[name].js' :
       '[name]-[hash].js',

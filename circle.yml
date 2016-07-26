@@ -9,5 +9,6 @@ deployment:
     tag: /v[0-9]+(\.[0-9]+)*/
     commands:
       - env NODE_ENV=production npm run build
+      - firebase deploy --token "$FIREBASE_TOKEN"
       - echo -e "$NPM_USER\n$NPM_PASS\n$NPM_EMAIL" | npm login
       - npm publish
