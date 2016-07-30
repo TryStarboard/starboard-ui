@@ -44,7 +44,7 @@
     "react-dnd-html5-backend": "2.1.2",
     "react-dom": "15.3.0",
     "react-redux": "4.4.5",
-    "react-router": "2.6.0",
+    "react-router": "2.6.1",
     "react-router-redux": "4.0.5",
     "react-virtualized": "7.15.1",
     "redux": "3.5.2",
