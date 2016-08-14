@@ -4,8 +4,7 @@
   "author": "Daiwei Lu <daiweilu123@gmail.com> (http://daiwei.lu)",
   "license": "MIT",
   "engines": {
-    "node": "5.11.0",
-    "npm": "3.8.6"
+    "node": "6.3.1"
   },
   "main": "./webpack-assets.json",
   "files": [
@@ -25,9 +24,8 @@
     "classnames": "2.2.5",
     "convict": "1.4.0",
     "css-loader": "0.23.1",
-    "eslint": "3.0.1",
-    "eslint-plugin-node": "2.0.0",
-    "eslint-plugin-react": "5.2.2",
+    "eslint": "3.3.0",
+    "eslint-config-d6u": "1.1.0",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.9.0",
     "firebase-tools": "3.0.7",

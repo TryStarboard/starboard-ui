@@ -1,5 +1,5 @@
 export default {
-  content : {
+  content: {
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -10,6 +10,6 @@ export default {
     border: 'none',
     background: '#fff',
     borderRadius: 0,
-    padding: '20px',
+    padding: '20px'
   }
-};
+}

@@ -1,12 +1,12 @@
 /*eslint no-process-env:0*/
 
-'use strict';
+'use strict'
 
-const join = require('path').join;
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const AssetsPlugin = require('assets-webpack-plugin');
-const conf = require('./conf');
+const join = require('path').join
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const AssetsPlugin = require('assets-webpack-plugin')
+const conf = require('./conf')
 
 const config = {
   entry: {
@@ -15,19 +15,19 @@ const config = {
 
   output: {
     path: join(__dirname, 'public'),
-    publicPath: conf.get('env') !== 'production' ?
-      '/' :
-      'https://static.getstarboard.xyz/',
-    filename: conf.get('env') !== 'production' ?
-      '[name].js' :
-      '[name]-[hash].js',
+    publicPath: conf.get('env') !== 'production'
+      ? '/'
+      : 'https://static.getstarboard.xyz/',
+    filename: conf.get('env') !== 'production'
+      ? '[name].js'
+      : '[name]-[hash].js'
   },
 
   devtool: 'source-map',
 
   resolve: {
     alias: {
-      svg: join(__dirname, 'src/svg'),
+      svg: join(__dirname, 'src/svg')
     }
   },
 
@@ -39,26 +39,26 @@ const config = {
         loader: 'babel',
         query: {
           presets: ['es2015', 'react'],
-          plugins: ['transform-object-rest-spread'],
+          plugins: ['transform-object-rest-spread']
         }
       },
       {
         test: /\.(jpg|png)$/,
-        loader: 'file',
+        loader: 'file'
       },
       {
         test: /\.svg$/,
-        loader: 'babel?presets[]=es2015&presets[]=react!svg-react',
+        loader: 'babel?presets[]=es2015&presets[]=react!svg-react'
       },
       {
         test: /\.(scss|css)$/,
-        loader: ExtractTextPlugin.extract('style', 'css!sass'),
-      },
+        loader: ExtractTextPlugin.extract('style', 'css!sass')
+      }
     ]
   },
 
   sassLoader: {
-    outputStyle: conf.get('env') !== 'production' ? 'expanded' : 'compressed',
+    outputStyle: conf.get('env') !== 'production' ? 'expanded' : 'compressed'
   },
 
   plugins: [
@@ -66,16 +66,16 @@ const config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(conf.get('env')),
       'MIXPANEL_TOKEN': JSON.stringify(conf.get('mixpanel.token')),
-      '__WEBSOCKET_HOST__': JSON.stringify(conf.get('websocket.host')),
+      '__WEBSOCKET_HOST__': JSON.stringify(conf.get('websocket.host'))
     }),
     new AssetsPlugin({
-      prettyPrint: true,
+      prettyPrint: true
     }),
-    new ExtractTextPlugin(conf.get('env') !== 'production' ?
-      '[name].css' :
-      '[name]-[contenthash].css'),
+    new ExtractTextPlugin(conf.get('env') !== 'production'
+      ? '[name].css'
+      : '[name]-[contenthash].css')
   ]
-};
+}
 
 if (conf.get('env') === 'production') {
   config.plugins.push(
@@ -88,7 +88,7 @@ if (conf.get('env') === 'production') {
         warnings: false
       }
     })
-  );
+  )
 }
 
-module.exports = config;
+module.exports = config

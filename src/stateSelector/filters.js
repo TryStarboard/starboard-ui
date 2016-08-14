@@ -1,7 +1,7 @@
-import {createSelector}          from 'reselect';
-import {prop, pipe, map}         from 'ramda';
-import {assignDefaultColorToTag} from './Utils';
-import {TAG_FILTER}              from '../const/FILTER_TYPES';
+import {createSelector} from 'reselect'
+import {prop, pipe, map} from 'ramda'
+import {assignDefaultColorToTag} from './Utils'
+import {TAG_FILTER} from '../const/FILTER_TYPES'
 
 export default createSelector(
   prop('filters'),
@@ -12,12 +12,12 @@ export default createSelector(
         if (filterObj.type === TAG_FILTER) {
           return {
             ...filterObj,
-            tag: assignDefaultColorToTag(tagsById[filterObj.tagId]),
-          };
+            tag: assignDefaultColorToTag(tagsById[filterObj.tagId])
+          }
         } else {
-          return filterObj;
+          return filterObj
         }
       })
-    )(filters);
+    )(filters)
   }
-);
+)

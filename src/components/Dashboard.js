@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import Sidebar              from './Sidebar';
-import TagsSideBar          from './TagsSideBar';
-import ReposList            from './ReposList';
-import RepoTagDragLayer     from './RepoTagDragLayer';
+import React, {Component} from 'react'
+import Sidebar from './Sidebar'
+import TagsSideBar from './TagsSideBar'
+import ReposList from './ReposList'
+import RepoTagDragLayer from './RepoTagDragLayer'
 
 export default class Dashboard extends Component {
   render() {
@@ -13,6 +13,6 @@ export default class Dashboard extends Component {
         <ReposList/>
         <RepoTagDragLayer/>
       </div>
-    );
+    )
   }
 }

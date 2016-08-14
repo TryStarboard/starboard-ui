@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {DragLayer} from 'react-dnd';
-import TrashCanIcon from 'svg/trash-can-icon.svg';
+import React, {Component} from 'react'
+import {DragLayer} from 'react-dnd'
+import TrashCanIcon from 'svg/trash-can-icon.svg'
 
-const {pow, sqrt} = Math;
+const {pow, sqrt} = Math
 
 class RepoTagDragLayer extends Component {
 
@@ -24,29 +24,29 @@ class RepoTagDragLayer extends Component {
       itemType,
       isDragging,
       currentOffset,
-      differenceFromInitialOffset,
-    } = this.props;
+      differenceFromInitialOffset
+    } = this.props
 
     if (!isDragging || itemType !== 'REPO_TAG') {
-      return null;
+      return null
     }
 
-    const {x, y} = differenceFromInitialOffset;
-    const showTrashCan = sqrt(pow(x, 2) + pow(y, 2)) > 200;
+    const {x, y} = differenceFromInitialOffset
+    const showTrashCan = sqrt(pow(x, 2) + pow(y, 2)) > 200
 
     if (!showTrashCan) {
-      return null;
+      return null
     }
 
     const style = {
       transform: `translate3d(${currentOffset.x - 30}px, ${currentOffset.y + 34}px, 0)`
-    };
+    }
 
     return (
       <div className='dashboard__repo-tag-drag-layer' style={ style }>
         <TrashCanIcon/>
       </div>
-    );
+    )
   }
 }
 
@@ -54,5 +54,5 @@ export default DragLayer((monitor) => ({
   itemType: monitor.getItemType(),
   currentOffset: monitor.getSourceClientOffset(),
   differenceFromInitialOffset: monitor.getDifferenceFromInitialOffset(),
-  isDragging: monitor.isDragging(),
-}))(RepoTagDragLayer);
+  isDragging: monitor.isDragging()
+}))(RepoTagDragLayer)

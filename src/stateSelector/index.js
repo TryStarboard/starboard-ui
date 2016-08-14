@@ -1,15 +1,15 @@
-import {prop, toPairs, fromPairs} from 'ramda';
-import filters   from './filters';
-import reposById from './reposById';
-import repos     from './repos';
-import tags      from './tags';
+import {prop, toPairs, fromPairs} from 'ramda'
+import filters from './filters'
+import reposById from './reposById'
+import repos from './repos'
+import tags from './tags'
 
 function createStateTransformer(transforms) {
-  const transformPairs = toPairs(transforms);
+  const transformPairs = toPairs(transforms)
   return (state) => {
-    const newStatePairs = transformPairs.map(([ key, transform ]) => [ key, transform(state) ]);
-    return fromPairs(newStatePairs);
-  };
+    const newStatePairs = transformPairs.map(([ key, transform ]) => [ key, transform(state) ])
+    return fromPairs(newStatePairs)
+  }
 }
 
 export default createStateTransformer({
@@ -19,5 +19,5 @@ export default createStateTransformer({
   tags,
   ui: prop('ui'),
   user: prop('user'),
-  routing: prop('routing'),
-});
+  routing: prop('routing')
+})

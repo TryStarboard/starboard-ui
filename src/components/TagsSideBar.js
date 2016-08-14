@@ -1,20 +1,20 @@
-import React, {Component} from 'react';
-import classnames from 'classnames';
-import {connect} from 'react-redux';
-import {getAllTags, changeAddTagInput} from '../actions';
-import Tag from './Tag';
-import ActionTag from './ActionTag';
-import DeleteZone from './DeleteZone';
+import React, {Component} from 'react'
+import classnames from 'classnames'
+import {connect} from 'react-redux'
+import {getAllTags, changeAddTagInput} from '../actions'
+import Tag from './Tag'
+import ActionTag from './ActionTag'
+import DeleteZone from './DeleteZone'
 
 class TagsSideBar extends Component {
   componentDidMount() {
-    getAllTags();
+    getAllTags()
   }
 
   render() {
-    const {isDraggingTag, errorMsg, inputValue} = this.props;
+    const {isDraggingTag, errorMsg, inputValue} = this.props
 
-    let inputContent;
+    let inputContent
 
     if (isDraggingTag) {
       inputContent = (
@@ -24,7 +24,7 @@ class TagsSideBar extends Component {
             Drag here to delete
           </div>
         </div>
-      );
+      )
     } else {
       inputContent = (
         <form onSubmit={(event) => event.preventDefault()} autoComplete='off'>
@@ -36,12 +36,12 @@ class TagsSideBar extends Component {
             value={inputValue}
             onChange={changeAddTagInput}/>
           <div className={classnames('dashboard__tags-input-helper-text', {
-            'dashboard__tags-input-helper-text--error': errorMsg,
+            'dashboard__tags-input-helper-text--error': errorMsg
           })}>
             {errorMsg || 'Type anything to search among repos'}
           </div>
         </form>
-      );
+      )
     }
 
     return (
@@ -51,7 +51,7 @@ class TagsSideBar extends Component {
         </div>
         <div className='dashboard__tags-tag-list'>
           {(() => {
-            return inputValue ? <ActionTag text={inputValue}/> : null;
+            return inputValue ? <ActionTag text={inputValue}/> : null
           })()}
           {this.props.tags.map((tag) => <Tag tag={tag} key={tag.id}/>)}
         </div>
@@ -60,7 +60,7 @@ class TagsSideBar extends Component {
           Drag & drop a tag over a repo to assign tags to repos
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -69,9 +69,9 @@ export default connect(
     tags,
     errorMsg: ui.addTagErrorMsg,
     isDraggingTag: ui.isDraggingTag,
-    inputValue: ui.tagInputValue,
+    inputValue: ui.tagInputValue
   }),
   null,
   null,
   {pure: true}
-)(TagsSideBar);
+)(TagsSideBar)
