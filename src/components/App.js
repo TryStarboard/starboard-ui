@@ -1,17 +1,17 @@
-import React, {Component} from 'react';
-import {DragDropContext} from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-import {Provider} from 'react-redux';
-import {Router, Route, browserHistory} from 'react-router';
-import {syncHistoryWithStore} from 'react-router-redux';
+import React, {Component} from 'react'
+import {DragDropContext} from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
+import {Provider} from 'react-redux'
+import {Router, Route, browserHistory} from 'react-router'
+import {syncHistoryWithStore} from 'react-router-redux'
 
-import store from '../store';
-import {getCurrentUser} from '../actions';
+import store from '../store'
+import {getCurrentUser} from '../actions'
 
-import Dashboard from './Dashboard';
-import UserProfileRoute from './UserProfileRoute';
+import Dashboard from './Dashboard'
+import UserProfileRoute from './UserProfileRoute'
 
-const history = syncHistoryWithStore(browserHistory, store);
+const history = syncHistoryWithStore(browserHistory, store)
 
 class App extends Component {
   render() {
@@ -24,8 +24,8 @@ class App extends Component {
           </Route>
         </Router>
       </Provider>
-    );
+    )
   }
 }
 
-export default DragDropContext(HTML5Backend)(App);
+export default DragDropContext(HTML5Backend)(App)

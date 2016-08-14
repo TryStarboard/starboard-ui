@@ -77,38 +77,38 @@ export const DEFAULT_TAG_COLORS = {
   },
   'c#': {
     bg: '#178600',
-    fg: 'white',
+    fg: 'white'
   },
   'ocaml': {
     bg: '#3BE133',
-    fg: 'black',
+    fg: 'black'
   },
   'lua': {
     bg: '#000080',
-    fg: 'white',
+    fg: 'white'
   },
   'rust': {
     bg: '#DEA584',
-    fg: 'black',
+    fg: 'black'
   },
   'c++': {
     bg: '#F34B7D',
-    fg: 'white',
+    fg: 'white'
   },
   'perl': {
     bg: '#0298C3',
-    fg: 'white',
+    fg: 'white'
   },
   'haskell': {
     bg: '#29B544',
-    fg: 'white',
+    fg: 'white'
   },
   'makefile': {
     bg: '#427819',
-    fg: 'white',
+    fg: 'white'
   },
   'viml': {
     bg: '#199F4B',
-    fg: 'white',
-  },
-};
+    fg: 'white'
+  }
+}

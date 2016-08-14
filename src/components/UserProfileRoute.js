@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import Sidebar              from './Sidebar';
-import UserProfile             from './UserProfile';
+import React, {Component} from 'react'
+import Sidebar from './Sidebar'
+import UserProfile from './UserProfile'
 
 export default class UserProfileRoute extends Component {
   render() {
@@ -9,6 +9,6 @@ export default class UserProfileRoute extends Component {
         <Sidebar/>
         <UserProfile/>
       </div>
-    );
+    )
   }
 }

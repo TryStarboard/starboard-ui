@@ -1,14 +1,14 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React from 'react'
+import {Link} from 'react-router'
 
-import LogoutIcon from 'svg/logout-icon.svg';
-import UserIcon from 'svg/user-icon.svg';
-import DashboardIcon from 'svg/dashboard-icon.svg';
-import RefreshIcon from 'svg/refresh-icon.svg';
-import EmailIcon from 'svg/email-icon.svg';
-import TwitterIcon from 'svg/twitter-icon.svg';
+import LogoutIcon from 'svg/logout-icon.svg'
+import UserIcon from 'svg/user-icon.svg'
+import DashboardIcon from 'svg/dashboard-icon.svg'
+import RefreshIcon from 'svg/refresh-icon.svg'
+import EmailIcon from 'svg/email-icon.svg'
+import TwitterIcon from 'svg/twitter-icon.svg'
 
-import {logout, syncRepos} from '../actions';
+import {logout, syncRepos} from '../actions'
 
 const Sidebar = () => (
   <nav className='nav app__nav'>
@@ -23,6 +23,6 @@ const Sidebar = () => (
       <button className='nav__btn' onClick={logout}><LogoutIcon /></button>
     </div>
   </nav>
-);
+)
 
-export {Sidebar as default};
+export {Sidebar as default}

@@ -1,13 +1,1 @@
-parserOptions:
-  sourceType: module
-  ecmaFeatures:
-    experimentalObjectRestSpread: true
-
-env:
-  browser: true
-  node: false
-
-rules:
-  no-restricted-syntax:
-    - 2
-    - WithStatement
+extends: d6u/browser

@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {deleteAccount} from '../actions';
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {deleteAccount} from '../actions'
 
 class UserProfile extends Component {
   render() {
     const {
       user: {avatar, email, displayname} = {}
-    } = this.props;
+    } = this.props
 
     return (
       <div className='userprofile app__user-profile'>
@@ -19,10 +19,10 @@ class UserProfile extends Component {
           Delete Account
         </button>
       </div>
-    );
+    )
   }
 }
 
 export default connect(
   ({user}) => ({user})
-)(UserProfile);
+)(UserProfile)
