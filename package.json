@@ -34,7 +34,7 @@
     "mixpanel-browser": "2.9.14",
     "node-sass": "3.9.3",
     "nprogress": "0.2.0",
-    "onchange": "2.5.0",
+    "onchange": "3.0.0",
     "ramda": "0.22.1",
     "react": "15.3.1",
     "react-addons-shallow-compare": "15.3.1",
