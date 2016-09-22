@@ -43,7 +43,7 @@
     "react-dom": "15.3.2",
     "react-redux": "4.4.5",
     "react-router": "2.8.1",
-    "react-router-redux": "4.0.5",
+    "react-router-redux": "4.0.6",
     "react-virtualized": "7.24.3",
     "redux": "3.6.0",
     "redux-logger": "2.6.1",
