@@ -52,7 +52,7 @@
     "reselect": "2.5.4",
     "rx": "4.1.0",
     "sass-loader": "4.0.2",
-    "socket.io-client": "1.4.8",
+    "socket.io-client": "1.5.0",
     "style-loader": "0.13.1",
     "svg-react-loader": "0.3.7",
     "updeep": "0.16.1",
