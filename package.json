@@ -13,7 +13,7 @@
     "webpack-assets.json"
   ],
   "devDependencies": {
-    "assets-webpack-plugin": "3.4.0",
+    "assets-webpack-plugin": "3.5.0",
     "axios": "0.12.0",
     "babel-core": "6.14.0",
     "babel-loader": "6.2.5",
